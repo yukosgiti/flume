@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styles from "./IoPorts.css";
 import { Portal } from "react-portal";
 import {
@@ -481,6 +481,8 @@ const Port = ({
       document.addEventListener("mousemove", handleDrag);
     }
   };
+  
+  const title = useMemo(() => [name, `<${type}>`].join(" - "), [name, type]);
 
   return (
     <React.Fragment>
@@ -499,6 +501,7 @@ const Port = ({
           e.stopPropagation();
         }}
         ref={port}
+        title={title}
       />
       {isDragging && !isInput ? (
         <Portal
